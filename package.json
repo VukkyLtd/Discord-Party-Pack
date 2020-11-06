@@ -1,0 +1,26 @@
+{
+  "name": "discord-party-pack",
+  "version": "1.0.0",
+  "description": "It's supposed to be a parody of Jackbox Party Packs but uh... it sucks??",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "pm2 start src/index.js --name DiscordPartyPack --watch -- --color && pm2 log",
+    "stop": "pm2 del DiscordPartyPack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VukkyLtd/Discord-Party-Pack.git"
+  },
+  "author": "Vukky Limited (Vukbox Games)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VukkyLtd/Discord-Party-Pack/issues"
+  },
+  "homepage": "https://github.com/VukkyLtd/Discord-Party-Pack#readme",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "discord.js": "^12.4.1",
+    "dotenv": "^8.2.0"
+  }
+}
