@@ -23,9 +23,8 @@ function play(message) {
 	message.channel.send(embeds.generic("Let's play TTFWA!", "The game is starting now.")).then((ttfwaPrompt) => {
 		ttfwaPrompt.channel.awaitMessages(filter, { max: 3, time: 60000, errors: ["time"] })
 			.then(collected => {
-				let lastPersonContent = collected.last().content.toLowerCase();
-				console.log("ttfwa");
-				console.log(lastPersonContent);
+				var lastPersonContent = collected.last().content.toLowerCase();
+				console.log(collected.last());
 				if(lastPersonContent == "ttfwa" && lastPersonContent == "trying to find who asked") {
 					message.channel.send(embeds.generic("You did it!", "You just played TTFWA."));
 				} else {

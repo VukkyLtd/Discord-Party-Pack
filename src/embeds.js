@@ -19,7 +19,7 @@ function titleScreenPack(description, pack) {
 	return new Discord.MessageEmbed()
 		.setAuthor(author)
 		.setTitle(`Pick a game from ${pack}!`)
-		.setTitle(description);
+		.setDescription(description);
 }
 
 function generic(title, description) {

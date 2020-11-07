@@ -4,7 +4,7 @@ module.exports = {
 
 function open(message) {
 	const embeds = require("../../embeds");
-	message.channel.send(embeds.titleScreenMain("You can pick from TTFWA (🙄 - requires 3 players)."))
+	message.channel.send(embeds.titleScreenPack("You can pick from TTFWA (🙄 - requires 3 players).", "The Discord Party Pack 1"))
 		.then((botPrompt) => {
 			botPrompt.react("🙄");
 			botPrompt.react("🚫");

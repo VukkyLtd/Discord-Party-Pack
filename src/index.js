@@ -12,12 +12,12 @@ client.on("message", async message => {
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const command = args.shift().toLowerCase();
-	const maintenance = true;
+	const maintenance = false;
 	if (command === "play") {
 		const embeds = require("./embeds");
 		if (maintenance == false) {
 			message.delete();
-			message.channel.send(embeds.titleScreenMain("You can pick from Party Pack 1 (1️⃣)."))
+			message.channel.send(embeds.titleScreenMain("You can pick from The Discord Party Pack 1 (1️⃣)."))
 				.then((botPrompt) => {
 					botPrompt.react("1️⃣");
 					botPrompt.react("🚫");
