@@ -33,6 +33,8 @@ function play(message) {
 				}
 			})
 			.catch(collected => {
+				message.delete();
+				ttfwaPrompt.delete();
 				message.channel.send("Looks like nobody decided to play TTFWA.");
 			});
 	});
