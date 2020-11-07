@@ -13,7 +13,9 @@ client.on("message", async message => {
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const command = args.shift().toLowerCase();
 	if (command === "play") {
-		message.channel.send("VUKBOX GAMES\n\nPick a pack.\nYou can pick from Party Pack 1, and nothing else.")
+		const embeds = require("./embeds");
+		message.delete();
+		message.channel.send(embeds.titleScreenMain("You can pick from Party Pack 1 (1️⃣)."))
 			.then((botPrompt) => {
 				botPrompt.react("1️⃣");
 				botPrompt.react("🚫");
@@ -26,15 +28,22 @@ client.on("message", async message => {
 						const reaction = collected.first();
 				
 						if (reaction.emoji.name === "1️⃣") {
-							message.reply("let's play Party Pack 1!");
-							const pack1launch = require("packs/pack1/launcher");
-							pack1launch.open(message);
-						} else {
-							message.reply("it seems like you don't want to play a pack. But that's okay! We can play a different time.");
+							const pack1launch = require("./packs/pack1/launcher");
+							botPrompt.delete();
+							message.reply("let's play Party Pack 1!")
+								.then((letsPlay) => {
+									setTimeout(() => {
+										letsPlay.delete();
+										pack1launch.open(message);
+									}, 2000);
+								});
+						} else if (reaction.emoji.name === "🚫") {
+							message.reply("it seems like you don't want to pick a pack. But that's okay! We can play a different time.");
 						}
 					})
 					.catch(collected => {
-						message.reply("it seems like you don't want to play a pack. But that's okay! We can play a different time.");
+						console.log(collected);
+						message.reply("it seems like you didn't pick a pack, or a scary error got thrown in my face!");
 					});
 			});
 	}
