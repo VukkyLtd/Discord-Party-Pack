@@ -24,6 +24,8 @@ function play(message) {
 	message.channel.send(embeds.generic("Let's play TTFWA!", "The game is starting now.")).then((ttfwaPrompt) => {
 		ttfwaPrompt.channel.awaitMessages(filter, { max: 3, time: 60000, errors: ["time"] })
 			.then(collected => {
+				message.delete();
+				ttfwaPrompt.delete();
 				var lastPersonContent = collected.last().content.toLowerCase();
 				if(ttfwaValidate(lastPersonContent) == true) {
 					message.channel.send(embeds.generic("You did it!", "You just played TTFWA."));
@@ -32,8 +34,6 @@ function play(message) {
 				}
 			})
 			.catch(collected => {
-				message.delete();
-				ttfwaPrompt.delete();
 				message.channel.send("Looks like there weren't enough players to play TTFWA.");
 			});
 	});
