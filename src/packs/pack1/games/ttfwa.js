@@ -2,7 +2,8 @@ var players = [];
 
 module.exports = {
 	open,
-	ttfwaValidate
+	ttfwaValidate,
+	playerValidate
 };
 
 function open(message) {
@@ -14,7 +15,7 @@ function open(message) {
 function play(message) {
 	const embeds = require("../../../embeds");
 	const filter = userMessage => {
-		if(!players.includes(userMessage.author.id)) {
+		if (playerValidate(userMessage.author.id, players) == true) {
 			players.push(userMessage.author.id);
 			return true;
 		} else {
@@ -34,6 +35,8 @@ function play(message) {
 				}
 			})
 			.catch(collected => {
+				message.delete();
+				ttfwaPrompt.delete();
 				message.channel.send("Looks like there weren't enough players to play TTFWA.");
 			});
 	});
@@ -41,6 +44,14 @@ function play(message) {
 
 function ttfwaValidate(content) {
 	if (content == "ttfwa" || content == "trying to find who asked") {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function playerValidate(playerID, playersIn) {
+	if(!playersIn.includes(playerID)) {
 		return true;
 	} else {
 		return false;
